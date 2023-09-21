@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get json api</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="Style/bootstrap.min.css">
+    <link rel="stylesheet" href="Style/index.css">
+</head>
+<body>
+    <div class="container-fluid menu-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 menu">
+                    <!-- <ul>
+                        <li>
+                            <a href="">HOme</a>
+                        </li>
+                        <li>
+                            <a href="">CSS</a>
+                        </li>
+                        <li>
+                            <a href="">Jquery</a>
+                        </li>
+                    </ul> -->
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div class="container" id="news-container">
+        <!-- <div class="row">
+            <div class="col-xl-3 col-lg-3 item-box">
+                <div class="box">
+                    <div class="img-box">
+                        <img src="1.jpg" alt="">
+                    </div>
+                    <div class="txt-box">
+                        txt
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 item-box">
+                <div class="box">
+                    <div class="img-box">
+                        img
+                    </div>
+                    <div class="txt-box">
+                        txt
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 item-box">
+                <div class="box">
+                    <div class="img-box">
+                        img
+                    </div>
+                    <div class="txt-box">
+                        txt
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 item-box">
+                <div class="box">
+                    <div class="img-box">
+                        img
+                    </div>
+                    <div class="txt-box">
+                        txt
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="row">
+            <div class="col-xl-12 col-lg-12 news-detail">
+                <h1>dfdf</h1>
+                <p>sdsf</p>
+            </div>
+        </div> -->
+    </div>
+    <!-- <div class="popup">
+        <div class="loading">
+          
+        </div>
+    </div> -->
+
+</body>
+<script>
+    var body = document.body;
+    const frmpopup = document.createElement("div"); // <div></div>
+    const frmLoading = document.createElement("div"); // <div></div>
+    frmpopup.classList.add("popup"); // <div class='popup'></div>
+    frmLoading.classList.add("loading"); //<div class='loading'><div>
+    frmpopup.appendChild(frmLoading); // <div class='popup'><div class='loading'></div></div>
+    // const popup = `
+    //             <div class="popup">
+    //                 <div class="loading">
+                    
+    //                 </div>
+    //             </div>
+    // `;
+    // body.innerHTML += popup;
+    body.appendChild(frmpopup); // <body> <div class='popup'><div class='loading'></div></div> <body>
+    var MyMenu;
+    async function getMenu(){
+        const url = "https://reanweb.com/api/teaching/get-menu.php";
+        const rp = await fetch(url);
+        let rs = await rp.json();
+        console.log(rs);
+        let txt ="<li class='m1' data-id='0'> <a href='#' class='active'><i class='fa-solid fa-house'></i></a></li>";
+        rs.forEach( e => {
+            txt+= `
+                <li class='m1' data-id=${e['id']}>
+                    <a href='#'>${e['name']}</a>
+                </li>
+            `;
+        });
+        document.getElementsByClassName("menu")[0].innerHTML = "<ul>"+txt+"</ul>"
+        var MyMenu = document.querySelectorAll('.m1');
+        MyMenu.forEach(e=>{
+            e.addEventListener('click',function(){
+                // alert(e.dataset.id)
+                body.appendChild(frmpopup);
+                getNews(e.dataset.id);
+               e.children[0].classList.add("active");
+             myLis = e.parentElement.children;
+             myLi = Array.from(myLis);
+             myLi.forEach(e=>{
+                e.children[0].classList.remove("active");
+             })
+             e.children[0].classList.add("active");
+            })
+        })  
+    }
+    var itemBoxs; // pel page refresh oy kert itemboxs ng mun
+    // getNew is img
+    async function getNews(id){
+        const url = `https://reanweb.com/api/teaching/get-news.php?mid=${id}`;
+        const rp = await fetch(url); // rp = respone
+        let rs = await rp.json(); // rs = result
+        // console.log(rs);
+        var txt ="";
+        rs.forEach(e=>{
+            txt += `
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 item-box " data-id='${e['id']}'>
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="${e['img']}" alt="">
+                        </div>
+                        <div class="txt-box">
+                            ${e['title']}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        document.getElementById('news-container').innerHTML = `<div class='row'>${txt}</div>`;
+        document.querySelector('.popup').remove();
+        var itemBoxs = document.querySelectorAll(".item-box");
+        itemBoxs.forEach(n=>{
+            n.addEventListener("click",function(){
+                getNewsDetail(n.dataset.id);
+            })
+        })
+    }
+    // var itemBoxs = document.querySelectorAll(".item-box"); // write jes means write krav  function getNews
+    // itemBoxs.forEach(e=>{
+    //     e.addEventListener("click",function(){
+    //         alert(e);
+    //     })
+    // });
+
+    // get news Detail
+    async function getNewsDetail(nid){
+        const url = `https://reanweb.com/api/teaching/get-news-detail.php?id=${nid}`;
+        const rp = await fetch(url);
+        let rs = await rp.json();
+        var txt = `
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 news-detail">
+                        <h1>${rs['title']}</h1>
+                        ${rs['des']};
+                    </div>
+                </div> 
+        `;
+        document.getElementById("news-container").innerHTML = txt;
+    }
+    getMenu();
+    getNews(0);
+    getNewsDetail();
+</script>
+</html>

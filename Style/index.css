@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Battambang&family=Koulen&display=swap');
+body{
+    font-family: 'Battambang', cursive;
+    /* font-family: 'Koulen', cursive; */
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.menu-bar{
+    background-color:cadetblue;
+}
+.menu ul{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.menu ul li{
+    display: inline-block;
+    /* float: left; */
+}
+.menu ul li a{
+    display: block;
+    text-decoration: none;
+    padding: 20px;
+    color: black;
+    font-family: 'Koulen', cursive;
+   padding-bottom: 10px;
+}
+.menu ul li a.active{
+    background-color: white;
+}
+.menu ul li a:hover{
+    color: white;
+}
+.item-box{
+    height: 330px;
+    /* background-color: goldenrod; */
+    margin-top: 10px;
+    padding: 1px;
+}
+.item-box .box{
+    /* background-color: aquamarine; */
+    width: 100%;
+    height: 100%;
+}
+.item-box .box .img-box{
+    width: 100%;
+    height: 60%;
+    /* background-color: bisque; */
+}
+.item-box .box .img-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+.item-box:hover .box .img-box img{
+    transform: scale(0.97);
+}
+.item-box .box .txt-box{
+    width: 100%;
+    height: 40%;
+    background-color: cornsilk;
+}
+.popup{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.49);
+    position: fixed;
+}
+.loading{
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-image: url("Loading.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translate(-50%,-50%);
+    background-size: contain;
+}
+
+@media (min-width: 1200px) {
+	
+}
+/*Large devices (desktops, 992px and up) lg*/ 
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+	
+    
+}
+/* Medium devices (tablets, 768px and up)
+ col-md */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .item-box{
+        height: 500px;
+        /* background-color: goldenrod; */
+        margin-top: 10px;
+        padding: 1px;
+    }
+    .item-box .box{
+        /* background-color: aquamarine; */
+        width: 100%;
+        height: 100%;
+    }
+    .item-box .box .img-box{
+        width: 100%;
+        height: 60%;
+        /* background-color: bisque; */
+    }
+    .item-box .box .img-box img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+    .item-box:hover .box .img-box img{
+        transform: scale(0.97);
+    }
+    .item-box .box .txt-box{
+        width: 100%;
+        height: 40%;
+        background-color: cornsilk;
+    }
+}   
+
+/*Small devices (landscape phones, 576px and up)
+col-sm*/
+@media (min-width: 576px) and (max-width: 767.98px){ 
+    .item-box{
+        height: 500px;
+        /* background-color: goldenrod; */
+        margin-top: 10px;
+        padding: 1px;
+    }
+    .item-box .box{
+        /* background-color: aquamarine; */
+        width: 100%;
+        height: 100%;
+    }
+    .item-box .box .img-box{
+        width: 100%;
+        height: 60%;
+        /* background-color: bisque; */
+    }
+    .item-box .box .img-box img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+    .item-box:hover .box .img-box img{
+        transform: scale(0.97);
+    }
+    .item-box .box .txt-box{
+        width: 100%;
+        height: 40%;
+        background-color: cornsilk;
+    }
+}
+
+/*Extra small devices (portrait phones, less than 576px) col-*/
+@media (max-width: 575.98px) {
+	.item-box{
+        height: 400px;
+        /* background-color: goldenrod; */
+        margin-top: 10px;
+        padding: 1px;
+    }
+    .item-box .box{
+        /* background-color: aquamarine; */
+        width: 100%;
+        height: 100%;
+    }
+    .item-box .box .img-box{
+        width: 100%;
+        height: 70%;
+        /* background-color: bisque; */
+    }
+    .item-box .box .img-box img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+    .item-box:hover .box .img-box img{
+        transform: scale(0.97);
+    }
+    .item-box .box .txt-box{
+        width: 100%;
+        height: 20%;
+        background-color: cornsilk;
+    }
+}
